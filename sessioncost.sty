@@ -1,0 +1,32 @@
+% sessioncost.sty
+% Typesetting cost-per-session comparison tables.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sessioncost}[2026/10/23 v0.1.0 Cost-per-session comparison tables]
+\RequirePackage{array}
+
+% --- main table environment -------------------------------------------
+% \begin{sessioncost}{Title}
+%   \scassum{assumptions line}
+%   \scrow{Item}{Setup cost}{Per session}{Sessions to break even}
+%   ...
+%   \scnote{small-print note}
+% \end{sessioncost}
+\newenvironment{sessioncost}[1]{%
+  \par\medskip\noindent
+  \begin{tabular}{@{}p{0.34\textwidth}rrr@{}}%
+  \multicolumn{4}{@{}l@{}}{\textbf{#1}}\\[2pt]
+  \textbf{Item} & \textbf{Setup} & \textbf{Per session} & \textbf{Break-even}\\\\
+}{%
+  \end{tabular}\par\medskip
+}
+
+% \scassum{text}: assumptions line under the title row
+\newcommand{\scassum}[1]{\multicolumn{4}{@{}l@{}}{\footnotesize\itshape #1}\\[2pt]}
+
+% \scrow{item}{setup cost}{cost per session}{sessions to break even}: one row
+\newcommand{\scrow}[4]{#1 & #2 & #3 & #4\\}
+
+% \scnote{text}: small-print note under the table
+\newcommand{\scnote}[1]{\multicolumn{4}{@{}p{0.98\textwidth}@{}}{\footnotesize #1}\\}
+
+\endinput
